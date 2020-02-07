@@ -1,0 +1,30 @@
+body {
+    background-color: powderblue;
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+
+}
+
+p {
+    color: red;
+}
+
+.button{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button1 {border-radius: 8px;}
+.button2 {border-radius: 8px;}
