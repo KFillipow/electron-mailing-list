@@ -25,8 +25,13 @@ p {
     width: 100%;
     font-size: 18px;
     text-align: center;
+    border-radius: 8px;
 }
 
+.button_container {
+    display: flex;
+    justify-content: center;
+}
 
 .button{
     background-color: #00ccff; /* Green */
@@ -41,5 +46,9 @@ p {
     cursor: pointer;
 }
 
-.button1 {border-radius: 8px;}
-.button2 {border-radius: 8px;}
+.button1 {
+    border-radius: 8px;
+}
+.button2 {
+    border-radius: 8px;
+}
