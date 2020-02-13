@@ -15,3 +15,11 @@ function createWindow () {
 }
 
 app.whenReady().then(createWindow)
+
+function ParseCustomers(){
+
+}
+
+function CreateLabels(){
+  
+}
