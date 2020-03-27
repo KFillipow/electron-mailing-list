@@ -31,13 +31,17 @@ function ParseCustomers(){
   var strLines = str.split("\n");
   for (var i in strLines){
     var obj = JSON.parse(strLines[i]);
-    CreateLabels(LabelCounter);
+    CreateLabels(LabelCounter,obj);
     if(LabelCounter => (LabelRows * LabelCols)-1){
       LabelCounter = 0;
     }
   }
 }
 
-function CreateLabels(LabelCounter){
+function AddCustomer(){
+  
+}
+
+function CreateLabels(LabelCounter, CustomerObj){
 
 }
