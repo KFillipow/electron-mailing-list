@@ -11,6 +11,7 @@
   <body>
     <h1>Customer List</h1>
     <br>
+    <!-- TODO Add the field ID above the text box and space them more neatly -->
     <input type="text" id="first_name" placeholder="First Name" />
     <input type="text" id="last_name"  placeholder="Last Name" />
     <input type="text" id="address1"   placeholder="Address1" />
@@ -33,9 +34,31 @@
         var city = document.getElementById("city").value;
         var state = document.getElementById("state").value;
         var zipcode = document.getElementById("zipcode").value;
-        var phone_num = document.getElementById("phone_num").value;
+        var home_num = document.getElementById("phone_num").value;
         var cell_num = document.getElementById("cell_num").value;
         var email = document.getElementById("email").value;
+
+        var CustomerObj = {'Title':"", 'Salutation':"", 'First Name': first_name, 'Last Name': last_name,'Address':address1,'Address2':address2,'City':city,'ST':state,'ZIP Code':zipcode,'Email':email,'Home Phone':home_num,'Alt Phone':"",'Work Phone':"",'Fax':"",'Company':"",'Website':"" };
+      
+        //var CustomerData = JSON.parse()
+
+
+
+        var fs = require('fs');
+        const rll = require('read-last-lines');
+        var CustomerFileName = './genkai_customers.json';
+        
+
+        
+        
+
+        fs.appendFile(CustomerFileName, JSON.stringify(CustomerObj, null, 4), (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            };
+            console.log("File has been updated");
+        });
       }
     </script>
   </body>
