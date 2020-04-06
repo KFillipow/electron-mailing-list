@@ -1,2 +1,3 @@
 npm install read-last-lines --save
 ghostscript
+npm install sqlite
