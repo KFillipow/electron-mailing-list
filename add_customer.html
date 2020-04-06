@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Teko|Ubuntu&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>View Customers</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+  </head>
+  <body>
+    <h1>Customer List</h1>
+    <br>
+    <!-- TODO Add the field ID above the text box and space them more neatly -->
+    <input type="text" id="first_name" placeholder="First Name" />
+    <input type="text" id="last_name"  placeholder="Last Name" />
+    <input type="text" id="address1"   placeholder="Address1" />
+    <input type="text" id="address2"   placeholder="Address2" />
+    <input type="text" id="city"       placeholder="City" />
+    <input type="text" id="state"      placeholder="State" />
+    <input type="text" id="zipcode"    placeholder="Zipcode" />
+    <input type="text" id="phone_num"  placeholder="Phone Number" />
+    <input type="text" id="cell_num"   placeholder="Cell Phone Number" />
+    <input type="text" id="email"      placeholder="Email Address" />
+    
+    <button onclick="addCustomer()">Add Customer</button>
+
+    <script>
+      function addCustomer(){
+        var first_name = document.getElementById("first_name").value;
+        var last_name = document.getElementById("last_name").value;
+        var address1 = document.getElementById("address1").value;
+        var address2 = document.getElementById("address2").value;
+        var city = document.getElementById("city").value;
+        var state = document.getElementById("state").value;
+        var zipcode = document.getElementById("zipcode").value;
+        var home_num = document.getElementById("phone_num").value;
+        var cell_num = document.getElementById("cell_num").value;
+        var email = document.getElementById("email").value;
+
+        var fs = require('fs');
+
+        const sqlite3 = require('sqlite3').verbose();
+        var CustomerFileName = './tansuData.db';
+        
+
+        let db = new sqlite3.Database(CustomerFileName, (err) => {
+          if (err) {
+            console.error(err.message);
+          }
+          console.log('Connected to the customer database.');
+        });
+
+        db.close();
+      }
+    </script>
+  </body>
+</html>

@@ -4,62 +4,66 @@
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css?family=Teko|Ubuntu&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>View Customers</title>
+    <title>Mailing List</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
   <body>
-    <h1>Customer List</h1>
+    <h1>Mailing List</h1>
     <br>
-    <!-- TODO Add the field ID above the text box and space them more neatly -->
-    <input type="text" id="first_name" placeholder="First Name" />
-    <input type="text" id="last_name"  placeholder="Last Name" />
-    <input type="text" id="address1"   placeholder="Address1" />
-    <input type="text" id="address2"   placeholder="Address2" />
-    <input type="text" id="city"       placeholder="City" />
-    <input type="text" id="state"      placeholder="State" />
-    <input type="text" id="zipcode"    placeholder="Zipcode" />
-    <input type="text" id="phone_num"  placeholder="Phone Number" />
-    <input type="text" id="cell_num"   placeholder="Cell Phone Number" />
-    <input type="text" id="email"      placeholder="Email Address" />
-    
-    <button onclick="addCustomer()">Add Customer</button>
+    <table id="customer-table:">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Phone Number</th>
+                <th>Cell Number</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+    </table>
 
     <script>
-      function addCustomer(){
-        var first_name = document.getElementById("first_name").value;
-        var last_name = document.getElementById("last_name").value;
-        var address1 = document.getElementById("address1").value;
-        var address2 = document.getElementById("address2").value;
-        var city = document.getElementById("city").value;
-        var state = document.getElementById("state").value;
-        var zipcode = document.getElementById("zipcode").value;
-        var home_num = document.getElementById("phone_num").value;
-        var cell_num = document.getElementById("cell_num").value;
-        var email = document.getElementById("email").value;
-
-        var CustomerObj = {'Title':"", 'Salutation':"", 'First Name': first_name, 'Last Name': last_name,'Address':address1,'Address2':address2,'City':city,'ST':state,'ZIP Code':zipcode,'Email':email,'Home Phone':home_num,'Alt Phone':"",'Work Phone':"",'Fax':"",'Company':"",'Website':"" };
-      
-        //var CustomerData = JSON.parse()
-
-
-
-        var fs = require('fs');
         const sqlite3 = require('sqlite3').verbose();
-        var CustomerFileName = './genkai_customers.json';
-        
+        var CustomerFileName = './tansuData.db';
 
-        
-        
-
-        fs.appendFile(CustomerFileName, JSON.stringify(CustomerObj, null, 4), (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            };
-            console.log("File has been updated");
+        let db = new sqlite3.Database(CustomerFileName, (err) => {
+          if (err) {
+            console.error(err.message);
+          }
+          console.log('Connected to the customer database.');
         });
-      }
+
+        let sql = `SELECT "First Name" firstname,
+                          "Last Name"  lastname,
+                          "Address"    address1,
+                          "Address2"   address2,
+                          "City"       city,
+                          "ST"         state,
+                          "ZIP Code"   zipcode,
+                          "Email"      email,
+                          "Home Phone" homephone,
+                          "Alt Phone"  altphone,
+                          "Work Phone" workphone,
+                          "Fax"        fax,
+                          "Company"    company,
+                          "Website"    website
+                    FROM original_mail_list 
+                    ORDER BY "Last Name"`;
+        db.all(sql, [], (err,rows) => {
+            if(err){
+                throw err;
+            }
+            rows.forEach((row) => {
+                console.log(`${row.firstname} ${row.lastname}`);
+            });
+        });
+        db.close();
     </script>
+    
   </body>
 </html>
