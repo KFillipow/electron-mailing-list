@@ -8,7 +8,7 @@ Smart('#table', class {
 				dataFields:
 				[
 					'firstname: string',
-					'Last Name: string',
+					'lastname: string',
 					'Address: string',
 					'Address 2: string',
 					'City: string',
@@ -24,7 +24,7 @@ Smart('#table', class {
 			}),
 			columns: [
 				'firstname',
-				'Last Name ',
+				'lastname',
 				'Address',
 				'Address 2',
                 'City',
@@ -83,8 +83,8 @@ function GetCustomers(){
             throw err;
         }
         rows.forEach(function (row){
-            console.log(row.firstname + " : " + row.lastname);
-            let CustRow = {};
+            //console.log(row.firstname + " : " + row.lastname);
+            var CustRow = {};
             CustRow["firstname"] = row.firstname;
             CustRow["lastname"]  = row.lastname;
             CustRow["address1"]  = row.address1;
@@ -99,11 +99,13 @@ function GetCustomers(){
             CustRow["fax"]       = row.fax;
             CustRow["company"]   = row.company;
             CustRow["website"]   = row.website;
+            console.log(CustRow);
             CustomerData[CustIter] = CustRow;
             CustIter++;
 
         });        
     });
     db.close();
+    //console.log(CustomerData);
     return CustomerData;
 }
