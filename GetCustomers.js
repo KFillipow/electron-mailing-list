@@ -44,7 +44,6 @@ Smart('#table', class {
 
 window.onload = function() {
 	const table = document.getElementById('table');
-	
 	table.sortBy('firstname', 'asc');
 }
 
@@ -83,23 +82,27 @@ function GetCustomers(){
         if(err){
             throw err;
         }
-        let CustRow = {};
-        CustRow["firstname"] = `${row.firstname}`;
-        CustRow["lastname"]  = `${row.lastname}`;
-        CustRow["address1"]  = `${row.address1}`;
-        CustRow["address2"]  = `${row.address2}`;
-        CustRow["city"]      = `${row.city}`;
-        CustRow["state"]     = `${row.state}`;
-        CustRow["zipcode"]   = `${row.zipcode}`;
-        CustRow["email"]     = `${row.email}`;
-        CustRow["homephone"] = `${row.homephone}`;
-        CustRow["altphone"]  = `${row.alphone}`;
-        CustRow["workphone"] = `${row.workphone}`;
-        CustRow["fax"]       = `${row.fax}`;
-        CustRow["company"]   = `${row.company}`;
-        CustRow["website"]   = `${row.website}`;
-        CustomerData[CustIter] = CustRow;
-        CustIter++;
+        rows.forEach(function (row){
+            console.log(row.firstname + " : " + row.lastname);
+            let CustRow = {};
+            CustRow["firstname"] = row.firstname;
+            CustRow["lastname"]  = row.lastname;
+            CustRow["address1"]  = row.address1;
+            CustRow["address2"]  = row.address2;
+            CustRow["city"]      = row.city;
+            CustRow["state"]     = row.state;
+            CustRow["zipcode"]   = row.zipcode;
+            CustRow["email"]     = row.email;
+            CustRow["homephone"] = row.homephone;
+            CustRow["altphone"]  = row.alphone;
+            CustRow["workphone"] = row.workphone;
+            CustRow["fax"]       = row.fax;
+            CustRow["company"]   = row.company;
+            CustRow["website"]   = row.website;
+            CustomerData[CustIter] = CustRow;
+            CustIter++;
+
+        });        
     });
     db.close();
     return CustomerData;
