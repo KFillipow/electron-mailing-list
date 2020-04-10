@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./node_modules/smart-webcomponents-community/source/styles/smart.default.css" type="text/css">
+    
     <link href="https://fonts.googleapis.com/css?family=Teko|Ubuntu&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Mailing List</title>
@@ -11,59 +12,21 @@
   <body>
     <h1>Mailing List</h1>
     <br>
-    <table id="customer-table:">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Zip Code</th>
-                <th>Phone Number</th>
-                <th>Cell Number</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-    </table>
 
-    <script>
-        const sqlite3 = require('sqlite3').verbose();
-        var CustomerFileName = './tansuData.db';
+  
+   <!--  <smart-table sort-mode="many" class="thead-light table-striped" id="table"></smart-table> -->
 
-        let db = new sqlite3.Database(CustomerFileName, (err) => {
-          if (err) {
-            console.error(err.message);
-          }
-          console.log('Connected to the customer database.');
-        });
+   <div class="demo-description">
+		Add "sort-mode" attribute and set it to "many" to make the Table sortable by multiple columns<tbody>.
+	</div>
+    <smart-table sort-mode="many" class="thead-light table-striped" id="table"></smart-table>
 
-        let sql = `SELECT "First Name" firstname,
-                          "Last Name"  lastname,
-                          "Address"    address1,
-                          "Address2"   address2,
-                          "City"       city,
-                          "ST"         state,
-                          "ZIP Code"   zipcode,
-                          "Email"      email,
-                          "Home Phone" homephone,
-                          "Alt Phone"  altphone,
-                          "Work Phone" workphone,
-                          "Fax"        fax,
-                          "Company"    company,
-                          "Website"    website
-                    FROM original_mail_list 
-                    ORDER BY "Last Name"`;
-        db.all(sql, [], (err,rows) => {
-            if(err){
-                throw err;
-            }
-            rows.forEach((row) => {
-                console.log(`${row.firstname} ${row.lastname}`);
-            });
-        });
-        db.close();
-    </script>
+    <!-- scripts -->  
+    <script type="module" src="./node_modules/smart-webcomponents-community/source/smart.table.js"></script> 
+    <script type="module" src="GetCustomers.js"></script>
+
+
+  	
     
   </body>
 </html>
